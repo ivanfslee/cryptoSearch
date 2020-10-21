@@ -1,0 +1,9 @@
+/* .dropdown-item {
+    display: flex;
+    align-items: center;
+    height: 60px;
+  } */
+
+  .autocomplete {
+    display: inline-block;
+  }

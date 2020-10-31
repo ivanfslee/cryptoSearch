@@ -28,9 +28,14 @@ body {
     margin-top: 20px !important;
   }
   
+  /* .results controls the look of the dropdown */
   .results {
-    max-height: 500px;
+    /* max-height: 500px; */
     /* overflow-y: scroll; */
+
+    /* Hiding scrollbars of the dropdown if there are too many results */
+    /* https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+    /* -ms-overflow-style: none;  */
   }
   
   .title .icon {

@@ -29,10 +29,14 @@ const autocompleteConfig = {
         onCoinSelect(coin.id, document.querySelector('#coin-summary'));
     },
     filterItems(coin, searchTerm) {
-        searchTerm = searchTerm.toLowerCase();
-        const coinName = coin.name.toLowerCase();
-        const coinSymbol = coin.symbol.toLowerCase();
-        return coinName === searchTerm || coinSymbol === searchTerm;
+        // Coin object from coinpaprika API has a 'is_active' property - we will filter inactive coins out.
+        if (coin.is_active) {
+            searchTerm = searchTerm.toLowerCase();
+            const coinName = coin.name.toLowerCase();
+            const coinSymbol = coin.symbol.toLowerCase();
+            // return coinName === searchTerm || coinSymbol === searchTerm;
+            return coinName === searchTerm || coinSymbol === searchTerm || coinName.startsWith(searchTerm) || coinSymbol.startsWith(searchTerm);    
+        }
     }
 }
 
@@ -48,18 +52,31 @@ const onCoinSelect = async (coinID, summaryElement) => {
 
     // TODO: Get price data
         // const currentTime = new Date().toISOString();
-        // const coinPrice = await axios.get(`https://api.coinpaprika.com/v1/tickers/${coinID}/historical?start=${currentTime}`);
+
+        // new Date().getTime() returns UNIX time in milliseconds
+        // We divide by 1000 because coinPaprika API takes UNIX time in seconds
+        // We subtract 300 (milliseconds) which is 5 minutes because the coinPaprika API only
+        // has price data in 5 minute increments
+        const fiveMinutes = 300;
+        const currentTime = parseInt(new Date().getTime() / 1000) - fiveMinutes;
+        console.log(currentTime);
+        const coinPrice = await axios.get(`https://api.coinpaprika.com/v1/tickers/${coinID}/historical?start=${currentTime}`);
         // const coinPrice = await axios.get(`https://api.coinpaprika.com/v1/tickers/${coinID}/historical?start=2020-10-24`);
-        // console.log(coinPrice);
+        console.log('coinPrice data object: ', coinPrice.data);
+        console.log(coinPrice.data[0].price);
 
         // promise.all
             //https://stackoverflow.com/questions/35612428/call-async-await-functions-in-parallel
             
-    summaryElement.innerHTML = coinTemplate(coin.data);
+    summaryElement.innerHTML = coinTemplate(coin.data, coinPrice.data[0]);
 }
 
-const coinTemplate = (coinDetail) => {
+const coinTemplate = (coinDetail, coinPriceData) => {
     return `    
+    <article class ="notification is-primary">
+        <p class="title">$${coinPriceData.price} USD</p>
+        <p class="subtitle">Current Price</p>
+    </article>
     <article class ="media">
         <div class="media-content">
             <div class="content">
@@ -73,5 +90,6 @@ const coinTemplate = (coinDetail) => {
         <p class="title">${coinDetail.development_status}</p>
         <p class="subtitle">Development Status</p>
     </article>
+
     `
 }

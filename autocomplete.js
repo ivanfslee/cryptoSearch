@@ -29,8 +29,8 @@ const createAutoComplete = ({
     const onInput = async event => {
         const items = await fetchData(event.target.value);
     
-        // If there are no items, then clear the dropdown
-        if (!items.length) {
+        // If there are no items or input is empty, then clear the dropdown
+        if (!items.length || input.value === '') {
             dropdown.classList.remove('is-active');
             return; // We return out of this function and dont run the code below
         }

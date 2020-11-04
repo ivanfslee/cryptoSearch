@@ -8,72 +8,92 @@ body {
   margin: 3rem;
 }
 
-  .tutorial {
-    width: 600px;
-    text-align: center;
-    margin: auto;
-  }
-  
-  figure.image {
-    display: flex;
-    justify-content: center;
-    background-color: black;
-  }
-  
-  figure .image img {
-    width: 128px;
-  }
-  
-  .notification {
-    margin-top: 20px !important;
-  }
-  
-  /* .results controls the look of the dropdown */
-  .results {
-    /* max-height: 500px; */
-    /* overflow-y: scroll; */
+.top-crypto-container {
+  /* margin: auto; */
+  margin: 5% auto 5%;
+  width: 30%;
+}
 
-    /* Hiding scrollbars of the dropdown if there are too many results */
-    /* https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
-    /* -ms-overflow-style: none;  */
-  }
-  
-  .title .icon {
-    margin-left: 15px;
-  }
-  
-  .hero {
-    margin-bottom: 20px;
-  }
-  
-  .forms {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  /* Position and size input box */
-  .autocomplete {
-    /*margin: top | horizontal | bottom */
-    margin: 10% auto 5%;
-    width: 40%;
-  }
+h4 {
+  text-align: center;
+}
 
-  input:hover {
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  }
-  
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    height: 50px;
-  }
-  
-  .dropdown-item img {
-    height: 50px;
-    margin-right: 10px;
-  }
+.coin-container {
+  display: inline-block;
+  /* width: 30%; */
+  font-size: 1.2rem;
+  /* width: 40vw; */
+}
 
-  #coin-summary {
-    max-width: 40vw;
-    margin: auto;
-  }
+.tutorial {
+  width: 600px;
+  text-align: center;
+  margin: auto;
+}
+
+figure.image {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+
+figure .image img {
+  width: 128px;
+}
+
+.notification {
+  margin-top: 20px !important;
+}
+
+/* .results controls the look of the dropdown */
+.results {
+  /* max-height: 500px; */
+  /* overflow-y: scroll; */
+
+  /* Hiding scrollbars of the dropdown if there are too many results */
+  /* https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp */
+  /* -ms-overflow-style: none;  */
+}
+
+.title .icon {
+  margin-left: 15px;
+}
+
+.hero {
+  margin-bottom: 20px;
+}
+
+.forms {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Position and size input box */
+.autocomplete {
+  /*margin: top | horizontal | bottom */
+  /* margin: 5% auto 5%; */
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+input:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.dropdown-item img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+#coin-summary {
+  max-width: 40vw;
+  margin: auto;
+}

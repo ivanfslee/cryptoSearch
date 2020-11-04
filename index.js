@@ -93,3 +93,45 @@ const coinTemplate = (coinDetail, coinPriceData) => {
 
     `
 }
+
+async function fetchCoinList() {
+    const response = await axios.get('https://api.coinpaprika.com/v1/coins', {
+        params: {
+            // apikey: apikey,
+            // s: searchTerm
+            // i: 'tt0118661'
+        }
+    })
+    console.log('running');
+    // if the response from API is an error
+    // then return an empty array 
+    if (!response.data) {
+        return [];
+    }
+    console.log(response.data);
+    return response.data;
+}
+
+async function fetchTopXCoins(coinIdx, topX) {
+    const coinsList = await coinIdx();
+
+    console.log('coinsList is: ', coinsList);
+    for (let i = 0; i < topX; i++) {
+        renderToUl(coinsList[i], i + 1);
+    }    
+}
+
+function renderToUl(coinData, rank) {
+    const parentUl = document.getElementById('top-10-cryptos');
+    const newCoin = document.createElement('li');
+    newCoin.innerHTML = `
+    </article>
+        <article class ="notification is-primary">
+        <span>${rank}</span>
+        <p class="title coin-container">${coinData.name}</p>
+    </article>
+    `
+    parentUl.append(newCoin);
+}
+
+fetchTopXCoins(fetchCoinList, 10);
